@@ -1,5 +1,12 @@
 package common
 
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+	"os"
+)
+
 type(
 	appError struct {
 		Error      string `json:"error"`
@@ -11,7 +18,7 @@ type(
 	}
 	configuration struct {
 		Server  string
-		Headers []head `json:"headers"`
+		StringConnection string
 	}
 )
 

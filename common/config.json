@@ -1,6 +1,4 @@
 {
     "Server": "12.0.0.1:3001",
-    "BD": {
-        "stringConnection": "root:@/bluork?charset=utf8"
-    }
+    "StringConnection": "root:@/bluork?charset=utf8"
 }

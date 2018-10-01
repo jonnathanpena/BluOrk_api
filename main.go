@@ -8,7 +8,7 @@ import(
 
 func main() {
 	common.StartUp()
-	router := routers.InitRoutes()
+	router := routers.InitRouters()
 	server := &http.Server{
 		Addr:    common.AppConfig.Server,
 		Handler: router,

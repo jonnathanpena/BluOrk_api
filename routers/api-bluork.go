@@ -6,6 +6,6 @@ import (
 )
 
 func setApiBluOrkRouters(router *mux.Router) *mux.Router {
-	router.http.HandleFunc("/users", controllers.getAllUsers).Method("GET")
+	router.HandleFunc("/users", controllers.GetAllUsers).Methods("GET")
 	return router
 }
