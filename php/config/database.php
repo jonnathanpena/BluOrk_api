@@ -6,9 +6,9 @@ class Database{
  
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "bluork";
-    private $username = "root";
-    private $password = "";
+    private $db_name = "bluork_test";
+    private $username = "bluork_test";
+    private $password = "BluOrk2018";
     public $conn;
  
     // get the database connection

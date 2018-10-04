@@ -24,7 +24,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $user->email_users= $data["email_users"];
 
 // query de lectura
-$stmt = $user->readById();
+$stmt = $user->readByEmail();
 $num = $stmt->rowCount();
 
 // user array
