@@ -8,28 +8,28 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
  
 // incluye la configuración de la base de datos y la conexión
 include_once '../config/database.php';
-include_once '../objects/users.php';
+include_once '../objects/request.php';
  
 // inicia la conexión a la base de datos
 $database = new Database();
 $db = $database->getConnection();
  
 // inicia el objeto
-$user = new Users($db);
+$request = new Request($db);
 
 // get posted data
 $data = json_decode(file_get_contents('php://input'), true);
 
 // configura los valores recibidos en post de la app
-$user->email_users= $data["email_users"];
+$request->id_req= $data["id_req"];
 
 // query de lectura
-$stmt = $user->readByEmail();
+$stmt = $request->readById();
 $num = $stmt->rowCount();
 
-// user array
-$user_arr=array();
-$user_arr["data"]=array();
+//request array
+$request_arr=array();
+$request_arr["data"]=array();
  
 // check if more than 0 record found
 if($num>0){ 
@@ -41,22 +41,31 @@ if($num>0){
         // this will make $row['name'] to
         // just $name only
         extract($row);
- 
-        $user_item=array(
-            "id_users"=>$id_users,
-            "firstName_users"=>$firstName_users,
-            "lastName_users"=>$lastName_users,
-            "email_users"=>$email_users,
-            "password_users"=>base64_decode($password_users),
-            "createAt_users"=>$createAt_users,
-            "updateAt_users"=>$updateAt_users,
-            "status_users"=>$status_users
+        
+        //Los nombres acá son iguales a los de la clase iguales a las columnas de la BD
+        $request_item=array(
+            "id_req"=>$id_req,
+            "detsubcat_id"=>$detsubcat_id,
+            "avatar_req"=>$avatar_req,
+            "title_req"=>$title_req,
+            "description_req"=>$description_req,
+            "city_id"=>$city_id,
+            "zipcode_req"=>$zipcode_req,
+            "address_req"=>$address_req,
+            "lat_req"=>$lat_req,
+            "long_req"=>$long_req,
+            "employment_type_id"=>$employment_type_id,
+            "payAmount_req"=>$payAmount_req,
+            "createBy_req"=>$createBy_req,
+            "createAt_req"=>$createAt_req,
+            "updateAt_req"=>$updateAt_req,
+            "status_req"=>$status_req
         );
  
-        array_push($user_arr["data"], $user_item);
+        array_push($request_arr["data"], $request_item);
     }
 }
 
-echo json_encode($user_arr);
+echo json_encode($request_arr);
 
 ?>

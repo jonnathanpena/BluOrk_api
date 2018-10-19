@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
  
 // incluye la configuración de la base de datos y la conexión
 include_once '../config/database.php';
-include_once '../objects/users.php';
+include_once '../objects/request.php';
 
 date_default_timezone_set('America/Bogota');
 $fecha = date("Y-m-d H:i:s");
@@ -18,20 +18,16 @@ $database = new Database();
 $db = $database->getConnection();
  
 // inicia el objeto
-$users = new Users($db);
+$request = new Request($db);
  
 // get posted data
 $data = json_decode(file_get_contents('php://input'), true);
 
 // configura los valores recibidos en post de la app
-$users->firstName_users= $data["firstName_users"];
-$users->lastName_users= $data["lastName_users"];
-$users->status_users= $data["status_users"];
-$users->updateAt_users= $fecha;
-$users->id_users= $data["id_users"];
+$users->id_req= $data["id_req"];
 
-// update user
-$response = $users->update();
+// delete request
+$response = $request->delete()();
 if($response == true){
     echo json_encode(true);
 }else{

@@ -49,7 +49,8 @@ if($num>0){
             "email_users"=>$email_users,
             "password_users"=>base64_decode($password_users),
             "createAt_users"=>$createAt_users,
-            "updateAt_users"=>$updateAt_users
+            "updateAt_users"=>$updateAt_users,
+            "status_users"=>$status_users
         );
  
         array_push($user_arr["data"], $user_item);

@@ -13,6 +13,7 @@ class Users {
     public $password_users;
     public $createAt_users;
     public $updateAt_users;
+    public $status_users;
 
     //constructor con base de datos como conexión
     public function __construct($db){
@@ -23,7 +24,7 @@ class Users {
     function read(){
     
         // select all query
-        $query = "SELECT `id_users`, `firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, `updateAt_users` 
+        $query = "SELECT `id_users`, `firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, `updateAt_users`, `status_users`
                     FROM `bo_users`";
     
         // prepare query statement
@@ -39,7 +40,7 @@ class Users {
     function readById(){
     
         // select all query
-        $query = "SELECT `id_users`, `firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, `updateAt_users` 
+        $query = "SELECT `id_users`, `firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, `updateAt_users`, `status_users`
                     FROM `bo_users` 
                     WHERE `id_users` = ".$this->id_users;
     
@@ -56,7 +57,7 @@ class Users {
     function readByEmail(){
     
         // select all query
-        $query = "SELECT `id_users`, `firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, `updateAt_users` 
+        $query = "SELECT `id_users`, `firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, `updateAt_users`, `status_users`
                     FROM `bo_users` WHERE `email_users` = '".$this->email_users."'";
     
         // prepare query statement
@@ -73,13 +74,14 @@ class Users {
     
         // query to insert record
         $query = "INSERT INTO `bo_users`(`firstName_users`, `lastName_users`, `email_users`, `password_users`, `createAt_users`, 
-                    `updateAt_users`) VALUES (
+                    `updateAt_users`, `status_users`) VALUES (
                         '".$this->firstName_users."',
                         '".$this->lastName_users."',
                         '".$this->email_users."',
                         '".$this->password_users."',
                         '".$this->createAt_users."',
-                        '".$this->updateAt_users."'
+                        '".$this->updateAt_users."',
+                        1
                     )";
         // prepara la sentencia del query
         $stmt = $this->conn->prepare($query); 
@@ -95,7 +97,8 @@ class Users {
         $query = "UPDATE `bo_users` SET 
                     `firstName_users`= '".$this->firstName_users."',
                     `lastName_users`= '".$this->lastName_users."',
-                    `updateAt_users`='".$this->updateAt_users."' 
+                    `updateAt_users`='".$this->updateAt_users."',
+                    `status_users` = ".$this->status_users."
                     WHERE `id_users` = ".$this->id_users;
         
         $stmt = $this->conn->prepare($query);
