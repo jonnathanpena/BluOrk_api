@@ -8,24 +8,23 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
  
 // incluye la configuración de la base de datos y la conexión
 include_once '../config/database.php';
-include_once '../objects/detrequesttags.php';
+include_once '../objects/tags.php';
  
 // inicia la conexión a la base de datos
 $database = new Database();
 $db = $database->getConnection();
  
 // inicia el objeto
-$detrequesttags = new DetRequestTags($db);
+$tags = new Tags($db);
  
 // get posted data
 $data = json_decode(file_get_contents('php://input'), true);
 
 // configura los valores recibidos en post de la app
-$detrequesttags->request_id= $data["request_id"];
-$detrequesttags->tags_id= $data["tags_id"];
+$tags->name_tags= $data["name_tags"];
 
-// insert detrequesttags
-$response = $detrequesttags->insert();
+// insert tags
+$response = $tags->insert();
 if($response == true){
     echo json_encode(true); 
 }else{
