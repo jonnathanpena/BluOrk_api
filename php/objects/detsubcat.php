@@ -28,6 +28,22 @@ class DetSubcat {
         }           
     }
 
+    function readById() {
+
+        $query = "SELECT `id_detsubcat`, `category_id`, `subcategory_id` 
+                    FROM `bo_detsubcat` 
+                    WHERE `id_detsubcat` = ".$this->id_detsubcat;
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+
+    }
+
     function delete() {
         $query = "DELETE FROM `bo_detsubcat` WHERE `id_detsubcat` = ".$this->id_detsubcat;
         $stmt = $this->conn->prepare($query);
